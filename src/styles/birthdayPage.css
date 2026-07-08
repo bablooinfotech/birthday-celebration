@@ -1,0 +1,395 @@
+/* ===================================================================
+   Premium Birthday Screen — Styles
+   Mobile-first. Pairs with BirthdayScreen.tsx (Motion-driven).
+=================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #1a0f14;
+}
+
+.bd-root {
+    position: relative;
+    width: 100vw;
+    height: 100dvh;
+    min-height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(ellipse 100% 70% at 50% 100%, #2a1520 0%, #160b12 55%, #0c0710 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fdf3ee;
+    font-family: "Manrope", sans-serif;
+    isolation: isolate;
+    animation: bd-scene-in 1.2s ease-out both;
+}
+
+@media (min-width: 640px) {
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #050505;
+    }
+
+    .bd-root {
+        width: 390px;
+        height: 844px;
+        border-radius: 44px;
+        box-shadow: 0 0 0 8px #111, 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+}
+
+@keyframes bd-scene-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.bd-phase-exiting {
+    animation: bd-scene-out 0.8s ease-in forwards;
+    pointer-events: none;
+}
+
+@keyframes bd-scene-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+}
+
+/* ---------------- Ambient aurora sky ---------------- */
+
+.bd-sky {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bd-aurora {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    mix-blend-mode: screen;
+    opacity: 0.55;
+    will-change: transform;
+}
+
+.bd-aurora-1 {
+    width: 260px;
+    height: 260px;
+    top: -8%;
+    left: 8%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.35), rgba(212, 175, 55, 0) 70%);
+}
+
+.bd-aurora-2 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    right: -10%;
+    background: radial-gradient(circle, rgba(232, 180, 184, 0.4), rgba(232, 180, 184, 0) 70%);
+}
+
+.bd-aurora-3 {
+    width: 220px;
+    height: 220px;
+    bottom: 5%;
+    left: 20%;
+    background: radial-gradient(circle, rgba(201, 107, 107, 0.3), rgba(201, 107, 107, 0) 70%);
+}
+
+/* ---------------- Stars ---------------- */
+
+.bd-stars {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.bd-star {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+    animation-name: bd-twinkle;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes bd-twinkle {
+
+    0%,
+    100% {
+        opacity: 0.15;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+}
+
+/* ---------------- Floating hearts ---------------- */
+
+.bd-hearts {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bd-heart {
+    position: absolute;
+    bottom: 0;
+    color: #e8879a;
+    filter: drop-shadow(0 0 6px rgba(232, 135, 154, 0.55));
+    will-change: transform, opacity;
+}
+
+/* ---------------- Falling rose petals ---------------- */
+
+.bd-petals {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bd-petal {
+    position: absolute;
+    top: 0;
+    background: radial-gradient(ellipse at 30% 30%, #f3b8bd, #c9536b 80%);
+    border-radius: 60% 10% 60% 10%;
+    opacity: 0.85;
+    will-change: transform, opacity;
+}
+
+/* ---------------- Content ---------------- */
+
+.bd-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    padding: 0 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+}
+
+.bd-headline {
+    margin: 0;
+    font-family: "Great Vibes", cursive;
+    font-size: 56px;
+    line-height: 1.1;
+    font-weight: 400;
+    background: linear-gradient(180deg, #fff6e5 0%, #e7c27f 55%, #d4af37 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.35));
+}
+
+.bd-name {
+    margin: 4px 0 0;
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    font-size: 27px;
+    letter-spacing: 0.05em;
+    color: #fdf3ee;
+}
+
+.bd-message {
+    margin: 14px 0 30px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 18px;
+    font-style: italic;
+    color: rgba(253, 243, 238, 0.75);
+    max-width: 260px;
+}
+
+/* ---------------- Gift box ---------------- */
+
+.bd-gift-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.bd-gift {
+    position: relative;
+    width: 108px;
+    height: 92px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+.bd-gift-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 72px;
+    border-radius: 8px;
+    background: linear-gradient(160deg, #8f2f3f 0%, #6f1f2d 60%, #591826 100%);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.15);
+}
+
+.bd-gift-lid {
+    position: absolute;
+    top: 12px;
+    left: -4px;
+    width: calc(100% + 8px);
+    height: 22px;
+    border-radius: 6px;
+    background: linear-gradient(160deg, #a83b4d 0%, #832838 100%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.bd-ribbon-v {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 80px;
+    background: linear-gradient(180deg, #f4e0a8, #d4af37);
+}
+
+.bd-ribbon-h {
+    position: absolute;
+    top: 12px;
+    left: -4px;
+    width: calc(100% + 8px);
+    height: 14px;
+    margin-top: 4px;
+    background: linear-gradient(90deg, #f4e0a8, #d4af37);
+}
+
+.bd-bow {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 46px;
+    height: 26px;
+}
+
+.bd-bow-loop {
+    position: absolute;
+    top: 0;
+    width: 22px;
+    height: 20px;
+    background: linear-gradient(160deg, #f4e0a8, #d4af37);
+    border-radius: 50% 50% 50% 50%;
+}
+
+.bd-bow-loop-left {
+    left: 0;
+    transform: rotate(-25deg);
+}
+
+.bd-bow-loop-right {
+    right: 0;
+    transform: rotate(25deg);
+}
+
+.bd-bow-knot {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #eab84f;
+}
+
+.bd-tap-hint {
+    margin: 0;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(253, 243, 238, 0.6);
+}
+
+.bd-burst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140px;
+    height: 140px;
+    margin-left: -70px;
+    margin-top: -70px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 246, 229, 0.95) 0%, rgba(212, 175, 55, 0.5) 45%, rgba(212, 175, 55, 0) 75%);
+    pointer-events: none;
+}
+
+/* ---------------- Confetti ---------------- */
+
+.bd-confetti-layer {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    z-index: 4;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.bd-confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+}
+
+.bd-confetti-rect {
+    border-radius: 1px;
+}
+
+.bd-confetti-circle {
+    border-radius: 50%;
+}
+
+/* ---------------- Reduced motion ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .bd-star,
+    .bd-aurora {
+        animation: none !important;
+    }
+
+    .bd-hearts,
+    .bd-petals {
+        display: none;
+    }
+}

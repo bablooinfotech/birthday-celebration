@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.letterPage {
+
+    width: 100%;
+    min-height: 100vh;
+
+    background:
+        linear-gradient(180deg, #fff7f8, #ffe8ef);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    padding: 20px;
+}
+
+.envelope {
+    width: 310px;
+    height: 220px;
+    position: relative;
+    cursor: pointer;
+}
+
+.envelopeBody {
+
+    width: 100%;
+    height: 100%;
+    background: #f6b5c7;
+
+    border-radius: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, .18);
+}
+
+.envelopeFlap {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 110px;
+
+    background: #ff7aa8;
+
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+
+    transform-origin: top;
+    z-index: 5;
+}
+
+.paperWrapper {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.paper {
+
+    width: 340px;
+    min-height: 520px;
+
+    background: linear-gradient(90deg, #c420b9, #66c1db);
+
+    border-radius: 20px;
+
+    padding: 28px;
+
+    overflow: hidden;
+
+    transform-origin: top;
+
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, .18);
+}
+
+.paragraph {
+
+    margin-bottom: 28px;
+}
+
+.paragraph p {
+
+    line-height: 1.9;
+    font-size: 17px;
+    color: black;
+}
+
+.nextBtn {
+
+    width: 100%;
+
+    margin-top: 30px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: linear-gradient(-90deg, #d91bc0, #15b9f4);
+
+    color: rgb(239, 229, 229);
+
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+
+    box-shadow:
+        0 15px 30px rgba(255, 79, 135, .35);
+}
+
+.nextBtn:hover {
+
+    background: linear-gradient(-90deg, #f4b115, #1bd967);
+    cursor: pointer;
+    box-shadow:
+        0 15px 30px rgba(255, 79, 135, .55);
+}
+@media(min-width:768px) {
+
+    .letterPage {
+
+        display: none;
+
+    }
+
+}

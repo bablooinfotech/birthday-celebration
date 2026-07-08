@@ -1,0 +1,274 @@
+/* ===================================================================
+   Premium Cinematic Loading Screen — Styles
+   Mobile-first. Designed for portrait phone viewports.
+   All motion uses transform/opacity only (GPU-accelerated, no lag).
+=================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+}
+
+.cls-root {
+    position: relative;
+    width: 100vw;
+    height: 100dvh;
+    min-height: 100vh;
+    /* fallback for older mobile browsers */
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse 90% 60% at 50% 100%, #0b1120 0%, #000 65%),
+        #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    font-family: "Manrope", sans-serif;
+    color: #f4f1ea;
+    isolation: isolate;
+}
+
+/* On tablets/desktop, frame it like a phone so it still reads as "mobile only" */
+@media (min-width: 640px) {
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #050505;
+    }
+
+    .cls-root {
+        width: 390px;
+        height: 844px;
+        border-radius: 44px;
+        box-shadow: 0 0 0 8px #111, 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+}
+
+/* ---------------- Stars ---------------- */
+
+.cls-sky {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cls-star {
+    position: absolute;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.65);
+    animation-name: cls-twinkle;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    will-change: opacity, transform;
+}
+
+@keyframes cls-twinkle {
+
+    0%,
+    100% {
+        opacity: 0.15;
+        transform: scale(0.7);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* ---------------- Clouds ---------------- */
+
+.cls-clouds {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.cls-cloud {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(28px);
+    background: radial-gradient(ellipse at center, rgba(180, 190, 210, 0.22), rgba(180, 190, 210, 0) 70%);
+    will-change: transform;
+}
+
+.cls-cloud-1 {
+    width: 260px;
+    height: 90px;
+    top: 22%;
+    left: -10%;
+}
+
+.cls-cloud-2 {
+    width: 320px;
+    height: 110px;
+    top: 30%;
+    left: 30%;
+    opacity: 0.8;
+}
+
+.cls-cloud-3 {
+    width: 220px;
+    height: 80px;
+    top: 40%;
+    left: 55%;
+    opacity: 0.6;
+}
+
+/* ---------------- Moon ---------------- */
+
+.cls-moon-wrap {
+    position: absolute;
+    top: 16%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cls-moon-glow {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244, 241, 234, 0.35) 0%, rgba(244, 241, 234, 0.08) 45%, rgba(244, 241, 234, 0) 70%);
+    opacity: 0;
+    will-change: opacity, transform;
+}
+
+.cls-moon {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fffdf6 0%, #f4ecd8 40%, #d8cba9 100%);
+    box-shadow: inset -14px -10px 30px rgba(120, 105, 70, 0.35), 0 0 40px rgba(244, 241, 234, 0.5);
+    opacity: 0;
+    will-change: opacity, transform, filter;
+}
+
+.cls-crater {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(140, 125, 95, 0.25);
+}
+
+.cls-crater-1 {
+    width: 18px;
+    height: 18px;
+    top: 26px;
+    left: 30px;
+}
+
+.cls-crater-2 {
+    width: 12px;
+    height: 12px;
+    top: 55px;
+    left: 70px;
+}
+
+.cls-crater-3 {
+    width: 9px;
+    height: 9px;
+    top: 78px;
+    left: 40px;
+}
+
+/* ---------------- Foreground content ---------------- */
+
+.cls-content {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    padding: 0 32px 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.cls-text {
+    margin: 0;
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    color: #f4f1ea;
+    display: flex;
+    align-items: baseline;
+}
+
+.cls-dots {
+    display: inline-flex;
+    margin-left: 2px;
+}
+
+.cls-dots span {
+    font-size: 22px;
+    line-height: 1;
+}
+
+.cls-progress-track {
+    position: relative;
+    width: 100%;
+    max-width: 260px;
+    height: 3px;
+    border-radius: 4px;
+    background: rgba(244, 241, 234, 0.12);
+    overflow: hidden;
+}
+
+.cls-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #c9b892, #f4ecd8, #ffffff);
+    box-shadow: 0 0 10px rgba(244, 236, 216, 0.7);
+    will-change: width;
+}
+
+.cls-progress-glint {
+    position: absolute;
+    top: 0;
+    width: 28px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+    filter: blur(2px);
+    will-change: left;
+}
+
+.cls-progress-pct {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: rgba(244, 241, 234, 0.6);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------------- Reduced motion ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .cls-star {
+        animation: none;
+        opacity: 0.6;
+    }
+
+    .cls-cloud {
+        display: none;
+    }
+}

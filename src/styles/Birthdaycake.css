@@ -1,0 +1,426 @@
+/* ===========================================================
+   BirthdayCake — midnight-velvet romantic theme (shared palette
+   with PolaroidGallery / VerticalTimeline)
+     --bc-ground     #14121A
+     --bc-gold       #D4AF7A
+     --bc-gold-deep  #B4884F
+     --bc-blush      #E8A0A0
+     --bc-ink        #F3EEE6
+   Frosting/cake tones are warm creams + deep plum, so the cake
+   reads as a physical object rather than a UI card.
+=========================================================== */
+
+.bc-root {
+    --bc-ground: #14121a;
+    --bc-gold: #d4af7a;
+    --bc-gold-deep: #b4884f;
+    --bc-blush: #e8a0a0;
+    --bc-ink: #f3eee6;
+    --bc-ink-dim: #c9c2b4;
+
+    --bc-frosting: #fbeee0;
+    --bc-frosting-shade: #e9d2ba;
+    --bc-sponge-top: #7a3b46;
+    --bc-sponge-bottom: #5c2b39;
+    --bc-plate: #2a2530;
+
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(120% 90% at 50% 20%, #241f2c 0%, var(--bc-ground) 65%);
+    overflow: hidden;
+    font-family: 'Manrope', 'Outfit', system-ui, -apple-system, sans-serif;
+    isolation: isolate;
+}
+
+/* ---------- Stage ---------- */
+
+.bc-stage {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    perspective: 900px;
+    padding: 12vh 20px 30px;
+}
+
+/* ---------- Cake, built for a 3D feel via layered gradients + shadows ---------- */
+
+.bc-cake {
+    position: relative;
+    width: min(72vw, 280px);
+    transform: rotateX(6deg);
+    transform-style: preserve-3d;
+}
+
+.bc-shadow {
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    width: 88%;
+    height: 26px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55) 0%, transparent 72%);
+    transform: translateX(-50%);
+    filter: blur(2px);
+    z-index: 0;
+}
+
+.bc-plate {
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    width: 108%;
+    height: 18px;
+    background: linear-gradient(180deg, #35303c 0%, var(--bc-plate) 70%);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5), inset 0 2px 3px rgba(255, 255, 255, 0.08);
+    z-index: 1;
+}
+
+.bc-tier {
+    position: relative;
+    z-index: 2;
+    border-radius: 14px 14px 10px 10px;
+    box-shadow:
+        inset 0 3px 4px rgba(255, 255, 255, 0.55),
+        inset 0 -8px 14px rgba(0, 0, 0, 0.22),
+        0 10px 18px -6px rgba(0, 0, 0, 0.45);
+}
+
+.bc-tier--bottom {
+    width: 100%;
+    height: 92px;
+    background: linear-gradient(180deg, var(--bc-frosting) 0%, var(--bc-frosting-shade) 78%, var(--bc-sponge-bottom) 78%, var(--bc-sponge-bottom) 100%);
+    margin-top: -4px;
+}
+
+.bc-tier--top {
+    width: 76%;
+    height: 66px;
+    margin: 0 auto -10px;
+    background: linear-gradient(180deg, var(--bc-frosting) 0%, var(--bc-frosting-shade) 74%, var(--bc-sponge-top) 74%, var(--bc-sponge-top) 100%);
+}
+
+.bc-drip {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
+    height: 16px;
+    background: radial-gradient(circle at 10% 0%, var(--bc-frosting) 0 40%, transparent 41%),
+        radial-gradient(circle at 30% 0%, var(--bc-frosting) 0 55%, transparent 56%),
+        radial-gradient(circle at 52% 0%, var(--bc-frosting) 0 45%, transparent 46%),
+        radial-gradient(circle at 74% 0%, var(--bc-frosting) 0 58%, transparent 59%),
+        radial-gradient(circle at 92% 0%, var(--bc-frosting) 0 42%, transparent 43%);
+    opacity: 0.9;
+}
+
+/* ---------- Candles ---------- */
+
+.bc-candles {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    height: 64px;
+    margin-bottom: -6px;
+}
+
+.bc-candle-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 8px;
+}
+
+.bc-candle {
+    width: 8px;
+    height: 46px;
+    border-radius: 3px;
+    background: repeating-linear-gradient(45deg,
+            var(--bc-blush) 0 4px,
+            var(--bc-frosting) 4px 8px);
+    box-shadow: inset -2px 0 3px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.bc-flame-wrap {
+    position: relative;
+    height: 26px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: -2px;
+}
+
+.bc-flame {
+    position: relative;
+    width: 9px;
+    height: 16px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: radial-gradient(circle at 50% 75%, #fff6d0 0%, var(--bc-gold) 45%, #e8722c 78%, transparent 100%);
+    box-shadow: 0 0 10px 3px rgba(232, 160, 90, 0.65), 0 0 20px 6px rgba(212, 175, 122, 0.35);
+    transform-origin: 50% 100%;
+    animation: bc-flicker 1.6s ease-in-out infinite;
+    animation-delay: calc(var(--bc-seed, 0) * 0.18s);
+}
+
+.bc-flame-core {
+    position: absolute;
+    left: 50%;
+    bottom: 15%;
+    width: 3px;
+    height: 6px;
+    border-radius: 50%;
+    background: #7fb8ff;
+    opacity: 0.7;
+    transform: translateX(-50%);
+    filter: blur(0.3px);
+}
+
+@keyframes bc-flicker {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg) skewX(0deg);
+        opacity: 1;
+    }
+
+    20% {
+        transform: scale(0.94, 1.05) rotate(-3deg) skewX(-2deg);
+        opacity: 0.92;
+    }
+
+    45% {
+        transform: scale(1.06, 0.96) rotate(2deg) skewX(2deg);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(0.97, 1.03) rotate(-2deg) skewX(-1deg);
+        opacity: 0.95;
+    }
+}
+
+.bc-flame-wrap--out .bc-flame {
+    animation: bc-extinguish 0.5s ease-out forwards;
+}
+
+@keyframes bc-extinguish {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+
+    60% {
+        opacity: 0.4;
+        transform: scale(1.3, 0.6);
+        filter: blur(1px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.2);
+        filter: blur(2px);
+    }
+}
+
+/* ---------- Smoke ---------- */
+
+.bc-smoke {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 2px;
+    height: 2px;
+}
+
+.bc-smoke span {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(230, 226, 220, 0.55);
+    transform: translateX(-50%);
+    animation: bc-smoke-rise 1.8s ease-out forwards;
+}
+
+.bc-smoke span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.bc-smoke span:nth-child(2) {
+    animation-delay: 0.18s;
+}
+
+.bc-smoke span:nth-child(3) {
+    animation-delay: 0.34s;
+}
+
+@keyframes bc-smoke-rise {
+    0% {
+        opacity: 0.55;
+        transform: translate(-50%, 0) scale(0.6);
+        filter: blur(0.5px);
+    }
+
+    30% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + 10px), -46px) scale(2.4);
+        filter: blur(3px);
+    }
+}
+
+/* ---------- Confetti ---------- */
+
+.bc-confetti-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bc-confetti {
+    position: absolute;
+    top: -5%;
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    animation-name: bc-confetti-fall;
+    animation-timing-function: cubic-bezier(0.3, 0.4, 0.3, 1);
+    animation-fill-mode: forwards;
+}
+
+.bc-confetti--rect {
+    border-radius: 1px;
+}
+
+.bc-confetti--circle {
+    border-radius: 50%;
+}
+
+@keyframes bc-confetti-fall {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--bc-drift, 0px), 118vh) rotate(var(--bc-rot, 180deg));
+    }
+}
+
+/* ---------- Wish ---------- */
+
+.bc-wish {
+    position: relative;
+    z-index: 4;
+    margin-top: 34px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    max-width: 300px;
+}
+
+.bc-wish--visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.bc-wish-text {
+    margin: 0;
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.3;
+    color: var(--bc-ink);
+    text-shadow: 0 0 18px rgba(212, 175, 122, 0.4);
+}
+
+/* ---------- Actions ---------- */
+
+.bc-actions {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px calc(26px + env(safe-area-inset-bottom, 0px));
+}
+
+.bc-btn {
+    min-width: 220px;
+    border: none;
+    padding: 15px 26px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.5s ease;
+}
+
+.bc-btn:active {
+    transform: scale(0.97);
+}
+
+.bc-btn--primary {
+    color: #201808;
+    background: linear-gradient(135deg, var(--bc-gold) 0%, var(--bc-gold-deep) 100%);
+    box-shadow: 0 8px 18px -6px rgba(212, 175, 122, 0.55);
+}
+
+.bc-btn--roses {
+    color: #2a1018;
+    background: linear-gradient(135deg, var(--bc-blush) 0%, #d47a86 100%);
+    box-shadow: 0 8px 18px -6px rgba(232, 160, 160, 0.55);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+}
+
+.bc-btn--roses.bc-btn--visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .bc-flame,
+    .bc-smoke span,
+    .bc-confetti {
+        animation: none !important;
+    }
+
+    .bc-wish,
+    .bc-btn--roses {
+        transition: none !important;
+    }
+}

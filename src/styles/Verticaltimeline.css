@@ -1,0 +1,353 @@
+/* ===========================================================
+   VerticalTimeline — midnight-velvet romantic theme
+   Shares its palette with PolaroidGallery for a consistent flow:
+     --vt-ground     #14121A  deep aubergine-black
+     --vt-glass      rgba(250,246,238,0.06)  frosted card surface
+     --vt-gold       #D4AF7A  champagne accent / node glow / light-trail
+     --vt-gold-deep  #B4884F
+     --vt-blush      #E8A0A0  soft ambient orbs
+     --vt-ink        #F3EEE6  light text
+     --vt-ink-dim    #C9C2B4  secondary text
+   Fonts: pair with the same faces as PolaroidGallery —
+   'Caveat' for accents, 'Manrope' for UI/body text.
+   MOBILE ONLY: this component is designed for narrow viewports;
+   it centers itself with a max-width on larger screens.
+=========================================================== */
+
+.vt-root {
+    --vt-ground: #14121a;
+    --vt-glass: rgba(250, 246, 238, 0.055);
+    --vt-glass-border: rgba(212, 175, 122, 0.18);
+    --vt-gold: #d4af7a;
+    --vt-gold-deep: #b4884f;
+    --vt-blush: #e8a0a0;
+    --vt-ink: #f3eee6;
+    --vt-ink-dim: #c9c2b4;
+
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--vt-ground);
+    overflow: hidden;
+    font-family: 'Manrope', 'Outfit', system-ui, -apple-system, sans-serif;
+    isolation: isolate;
+}
+
+/* ---------- Ambient drifting background ---------- */
+
+.vt-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.vt-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(42px);
+    opacity: 0.35;
+    will-change: transform;
+}
+
+.vt-orb--a {
+    width: 220px;
+    height: 220px;
+    left: -60px;
+    top: 6%;
+    background: var(--vt-gold);
+    animation: vt-drift-a 22s ease-in-out infinite;
+}
+
+.vt-orb--b {
+    width: 260px;
+    height: 260px;
+    right: -90px;
+    top: 38%;
+    background: var(--vt-blush);
+    opacity: 0.22;
+    animation: vt-drift-b 26s ease-in-out infinite;
+}
+
+.vt-orb--c {
+    width: 200px;
+    height: 200px;
+    left: -40px;
+    bottom: 8%;
+    background: var(--vt-gold-deep);
+    opacity: 0.25;
+    animation: vt-drift-c 30s ease-in-out infinite;
+}
+
+@keyframes vt-drift-a {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(40px, 60px) scale(1.15);
+    }
+}
+
+@keyframes vt-drift-b {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-50px, -40px) scale(1.1);
+    }
+}
+
+@keyframes vt-drift-c {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(30px, -50px) scale(1.2);
+    }
+}
+
+/* ---------- Track / spine / list ---------- */
+
+.vt-track {
+    position: relative;
+    z-index: 1;
+    padding: 64px 20px 40px 0;
+}
+
+.vt-spine {
+    position: absolute;
+    left: 34px;
+    top: 64px;
+    bottom: 40px;
+    width: 2px;
+    background: rgba(243, 238, 230, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.vt-spine-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--vt-gold) 0%, var(--vt-gold-deep) 60%, transparent 100%);
+    box-shadow: 0 0 14px 1px rgba(212, 175, 122, 0.55);
+    transform: scaleY(0);
+}
+
+.vt-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.vt-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding-left: 20px;
+    margin-bottom: 46px;
+}
+
+.vt-item:last-child {
+    margin-bottom: 0;
+}
+
+/* ---------- Glowing node ---------- */
+
+.vt-node-wrap {
+    position: relative;
+    z-index: 2;
+    flex: none;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 22px;
+}
+
+.vt-node {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #1d1a24;
+    border: 2px solid rgba(212, 175, 122, 0.4);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+}
+
+.vt-node-core {
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--vt-gold);
+    opacity: 0.25;
+    transition: opacity 0.4s ease;
+}
+
+.vt-node.is-active {
+    border-color: var(--vt-gold);
+    background: #24201a;
+    box-shadow:
+        0 0 0 4px rgba(212, 175, 122, 0.12),
+        0 0 16px 3px rgba(212, 175, 122, 0.65),
+        0 0 32px 8px rgba(212, 175, 122, 0.3);
+    animation: vt-node-pulse 2.2s ease-in-out infinite;
+}
+
+.vt-node.is-active .vt-node-core {
+    opacity: 1;
+}
+
+@keyframes vt-node-pulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 0 4px rgba(212, 175, 122, 0.12),
+            0 0 16px 3px rgba(212, 175, 122, 0.65),
+            0 0 32px 8px rgba(212, 175, 122, 0.3);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 6px rgba(212, 175, 122, 0.16),
+            0 0 22px 6px rgba(212, 175, 122, 0.8),
+            0 0 40px 12px rgba(212, 175, 122, 0.4);
+    }
+}
+
+/* ---------- Milestone card ---------- */
+
+.vt-card {
+    flex: 1;
+    min-width: 0;
+    background: var(--vt-glass);
+    border: 1px solid var(--vt-glass-border);
+    border-radius: 16px;
+    padding: 16px 16px 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.6);
+    will-change: transform, opacity;
+}
+
+.vt-date {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--vt-gold);
+    margin-bottom: 10px;
+}
+
+.vt-photo-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    background: #232028;
+}
+
+.vt-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.vt-title {
+    margin: 0 0 6px;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--vt-ink);
+    letter-spacing: 0.01em;
+}
+
+.vt-desc {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--vt-ink-dim);
+}
+
+/* ---------- End / Continue ---------- */
+
+.vt-end {
+    display: flex;
+    justify-content: center;
+    padding: 30px 20px 10px 20px;
+}
+
+.vt-continue {
+    min-width: 200px;
+    border: none;
+    padding: 15px 28px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #201808;
+    background: linear-gradient(135deg, var(--vt-gold) 0%, var(--vt-gold-deep) 100%);
+    box-shadow: 0 8px 18px -6px rgba(212, 175, 122, 0.55);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+    pointer-events: none;
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s ease;
+}
+
+.vt-continue--visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.vt-continue:active {
+    transform: scale(0.97);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .vt-orb,
+    .vt-node.is-active {
+        animation: none !important;
+    }
+
+    .vt-card,
+    .vt-continue {
+        transition: none !important;
+    }
+}
+
+/* ---------- Small phones ---------- */
+
+@media (max-width: 360px) {
+    .vt-track {
+        padding-right: 14px;
+    }
+
+    .vt-spine {
+        left: 30px;
+    }
+
+    .vt-title {
+        font-size: 1rem;
+    }
+}

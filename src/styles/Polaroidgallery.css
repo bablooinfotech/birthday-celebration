@@ -1,0 +1,298 @@
+/* ===========================================================
+   PolaroidGallery — midnight-velvet romantic theme
+   Palette:
+     --pg-ground        #14121A  deep aubergine-black
+     --pg-glow          #2A1F35  radial glow behind stack
+     --pg-paper         #FAF6EE  polaroid paper white
+     --pg-ink           #3A322A  handwritten caption ink
+     --pg-gold          #D4AF7A  champagne accent
+     --pg-gold-deep     #B4884F  gold pressed/shadow
+     --pg-blush         #E8A0A0  floating hearts
+     --pg-light         #F3EEE6  light UI text
+   Fonts: a handwritten display face for captions (Caveat) and a
+   clean geometric sans for UI chrome (Manrope / Outfit).
+   Import them where you load fonts, e.g.:
+     @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Manrope:wght@400;600;700&display=swap');
+=========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Manrope:wght@400;600;700&display=swap');
+
+.pg-root {
+    --pg-ground: #14121a;
+    --pg-glow: #2a1f35;
+    --pg-paper: #faf6ee;
+    --pg-ink: #3a322a;
+    --pg-gold: #d4af7a;
+    --pg-gold-deep: #b4884f;
+    --pg-blush: #e8a0a0;
+    --pg-light: #f3eee6;
+
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--pg-ground);
+    font-family: 'Manrope', 'Outfit', system-ui, -apple-system, sans-serif;
+    isolation: isolate;
+}
+
+/* ---------- Blurred cinematic backdrop ---------- */
+
+.pg-bg {
+    position: absolute;
+    inset: -5%;
+    background-position: center;
+    background-size: cover;
+    filter: blur(18px) saturate(1.15) brightness(0.55);
+    transform: scale(1.15);
+    z-index: 0;
+}
+
+.pg-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(120% 90% at 50% 38%, transparent 0%, rgba(20, 18, 26, 0.35) 55%, rgba(20, 18, 26, 0.92) 100%),
+        linear-gradient(180deg, rgba(20, 18, 26, 0.35) 0%, transparent 22%, transparent 68%, rgba(20, 18, 26, 0.85) 100%);
+    pointer-events: none;
+}
+
+/* ---------- Floating hearts ---------- */
+
+.pg-hearts-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.pg-heart {
+    position: absolute;
+    bottom: -5%;
+    color: var(--pg-blush);
+    font-size: 1.1rem;
+    opacity: 0;
+    filter: drop-shadow(0 0 6px rgba(232, 160, 160, 0.45));
+    will-change: transform, opacity;
+}
+
+.pg-heart--ambient {
+    animation-name: pg-float-ambient;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+
+.pg-heart--burst {
+    bottom: 42%;
+    font-size: 1.3rem;
+    animation-name: pg-float-burst;
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+    animation-iteration-count: 1;
+}
+
+@keyframes pg-float-ambient {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(var(--pg-heart-scale, 0.6)) rotate(0deg);
+    }
+
+    12% {
+        opacity: 0.75;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(14px, -78vh) scale(var(--pg-heart-scale, 0.6)) rotate(14deg);
+    }
+}
+
+@keyframes pg-float-burst {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(calc(var(--pg-heart-scale, 0.7) * 0.6));
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--pg-drift, 12px), -32vh) scale(var(--pg-heart-scale, 0.7));
+    }
+}
+
+/* ---------- Stage & stack ---------- */
+
+.pg-stage {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 6vh 0 128px;
+}
+
+.pg-stack {
+    position: relative;
+    width: min(78vw, 320px);
+    height: min(78vw, 320px);
+    margin: auto 0;
+}
+
+.pg-card {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--pg-paper);
+    padding: 14px 14px 22px;
+    border-radius: 3px;
+    box-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.15),
+        0 10px 20px -6px rgba(0, 0, 0, 0.5),
+        0 24px 48px -12px rgba(0, 0, 0, 0.55);
+    cursor: grab;
+    touch-action: pan-y;
+}
+
+.pg-card--top {
+    cursor: grab;
+}
+
+.pg-card--top:active {
+    cursor: grabbing;
+}
+
+.pg-photo-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #d9d3c6;
+    border-radius: 1px;
+}
+
+.pg-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+.pg-caption {
+    margin: 10px 2px 0;
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-weight: 600;
+    font-size: 1.35rem;
+    line-height: 1.15;
+    color: var(--pg-ink);
+    text-align: center;
+    letter-spacing: 0.2px;
+}
+
+/* ---------- Progress dots ---------- */
+
+.pg-progress {
+    display: flex;
+    gap: 7px;
+    margin-top: 22px;
+}
+
+.pg-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(243, 238, 230, 0.28);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.pg-dot--seen {
+    background: rgba(212, 175, 122, 0.55);
+}
+
+.pg-dot--active {
+    background: var(--pg-gold);
+    transform: scale(1.35);
+}
+
+/* ---------- Bottom action bar ---------- */
+
+.pg-actions {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    display: flex;
+    gap: 10px;
+    padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(180deg, transparent 0%, rgba(20, 18, 26, 0.55) 35%, rgba(20, 18, 26, 0.95) 100%);
+}
+
+.pg-btn {
+    flex: 1;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.pg-btn:active {
+    transform: scale(0.97);
+}
+
+.pg-btn--ghost {
+    background: transparent;
+    color: var(--pg-light);
+    border: 1px solid rgba(212, 175, 122, 0.55);
+}
+
+.pg-btn--ghost:hover {
+    border-color: var(--pg-gold);
+    background: rgba(212, 175, 122, 0.08);
+}
+
+.pg-btn--primary {
+    background: linear-gradient(135deg, var(--pg-gold) 0%, var(--pg-gold-deep) 100%);
+    color: #201808;
+    box-shadow: 0 8px 18px -6px rgba(212, 175, 122, 0.55);
+}
+
+.pg-btn--primary:hover {
+    box-shadow: 0 10px 22px -6px rgba(212, 175, 122, 0.7);
+}
+
+/* ---------- Empty state ---------- */
+
+.pg-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: var(--pg-light, #f3eee6);
+    background: var(--pg-ground, #14121a);
+    font-family: 'Manrope', system-ui, sans-serif;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .pg-heart,
+    .pg-bg {
+        animation: none !important;
+        transition: none !important;
+    }
+}

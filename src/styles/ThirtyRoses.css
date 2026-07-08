@@ -1,0 +1,102 @@
+.rosePage {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #fff7fb, #ffe4ec);
+    padding: 20px;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.rosePage h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #d6336c;
+}
+
+.roseGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    justify-items: center;
+}
+
+.rose {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    border: none;
+    background: white;
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, .12);
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rose:active {
+    transform: scale(.95);
+}
+
+.opened {
+    background: #fff0f5;
+}
+
+.compliment {
+    position: fixed;
+    left: 50%;
+    bottom: 35px;
+    transform: translateX(-50%);
+    width: 82%;
+    background: white;
+    padding: 18px;
+    border-radius: 20px;
+    font-size: 17px;
+    color: #d6336c;
+    font-weight: 600;
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, .15);
+}
+
+.finishBox {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 245, 248, .96);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+}
+
+.heart {
+    font-size: 90px;
+    margin-bottom: 20px;
+}
+
+.finishBox h3 {
+    color: #d6336c;
+    margin-bottom: 25px;
+}
+
+.continueBtn {
+
+    background: #ff4f87;
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow:
+        0 10px 25px rgba(255, 79, 135, .4);
+}
+
+@media(min-width:768px) {
+
+    .rosePage {
+        display: none;
+    }
+
+}
