@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, type PanInfo } from 'framer-motion';
-import '../styles/PolaroidGallery.css';
+import '../styles/Polaroidgallery.css';
 
 /**
  * PolaroidGallery
